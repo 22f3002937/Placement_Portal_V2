@@ -9,7 +9,7 @@ from config import Config
 from celery import Celery
 from celery.schedules import crontab
 
-celery = None   # module-level reference, set inside create_app()
+celery = None   
 
 
 def make_celery(app):
@@ -136,7 +136,7 @@ def _seed_admin(app):
     """Create admin if not exists, or update email/password if config changed."""
     admin = User.query.filter_by(role=Roles.ADMIN).first()
     if admin:
-        # Update email and password from config in case they changed
+
         changed = False
         if admin.email != app.config["ADMIN_EMAIL"]:
             admin.email = app.config["ADMIN_EMAIL"]

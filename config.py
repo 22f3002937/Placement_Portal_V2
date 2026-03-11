@@ -1,6 +1,5 @@
 import os
 
-# Load .env file if present (development convenience)
 try:
     from dotenv import load_dotenv
     _base = os.path.abspath(os.path.dirname(__file__))
@@ -11,7 +10,7 @@ try:
             load_dotenv(_path, override=True)
             break
 except ImportError:
-    pass  # python-dotenv not installed — set env vars manually
+    pass  
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -35,24 +34,24 @@ class Config:
     REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
 
     # ── Celery ───────────────────────────────────────────────────────────────
-    CELERY_BROKER_URL = REDIS_URL       # used by celery_worker.py
-    CELERY_RESULT_BACKEND = REDIS_URL   # used by celery_worker.py
+    CELERY_BROKER_URL = REDIS_URL       
+    CELERY_RESULT_BACKEND = REDIS_URL   
     CELERY_TIMEZONE = "Asia/Kolkata"
 
     # ── Flask-Caching (Redis backend) ────────────────────────────────────────
     CACHE_TYPE = "RedisCache"
     CACHE_REDIS_URL = REDIS_URL
-    CACHE_DEFAULT_TIMEOUT = 300          # 5 minutes default
+    CACHE_DEFAULT_TIMEOUT = 300         
 
     # ── Flask-Mail (Gmail SMTP) ──────────────────────────────────────────────
     MAIL_SERVER = os.environ.get("MAIL_SERVER", "smtp.gmail.com")
     MAIL_PORT = int(os.environ.get("MAIL_PORT", 587))
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")   # set in env
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")   # set in env / app password
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")   
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")   
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER") or os.environ.get("MAIL_USERNAME") or "noreply@placement.com"
 
     # ── Admin seed credentials ───────────────────────────────────────────────
-    ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "24f2000462@ds.study.iitm.ac.in")
+    ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "22f3002937@ds.study.iitm.ac.in")
     ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
     ADMIN_NAME = os.environ.get("ADMIN_NAME", "Institute Admin")
